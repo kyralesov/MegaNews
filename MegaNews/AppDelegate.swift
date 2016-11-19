@@ -7,15 +7,46 @@
 //
 
 import UIKit
+import DrawerController
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var drawerController: DrawerController!
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        //Navigation
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController = mainStoryboard
+            .instantiateViewController(withIdentifier: Storyboard.newsNavigationIdentifire)
+        let leftSideNavController = mainStoryboard
+            .instantiateViewController(withIdentifier: Storyboard.leftMenuNavigationIdentifire)
+
+        self.drawerController = DrawerController(centerViewController: navigationController,
+                                                 leftDrawerViewController: leftSideNavController)
+        self.drawerController.showsShadows = false
+        self.drawerController.openDrawerGestureModeMask = .all
+        self.drawerController.closeDrawerGestureModeMask = .all
+        
+        self.drawerController.drawerVisualStateBlock = {(drawerController, drawerSide, percentVisible) in
+            let visualStateBlock = DrawerVisualState.parallaxVisualStateBlock(parallaxFactor: 2.0)
+            visualStateBlock(drawerController, drawerSide, percentVisible)
+        }
+        
+        self.window?.rootViewController = drawerController
+        
+        return true
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        self.window?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 
