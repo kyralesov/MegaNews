@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (4.1.0)
+  - AlamofireImage (3.1.0):
+    - Alamofire (~> 4.0)
   - DrawerController (3.0.0):
     - DrawerController/Core (= 3.0.0)
     - DrawerController/DrawerVisualStates (= 3.0.0)
@@ -10,14 +12,16 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - AlamofireImage (~> 3.1)
   - DrawerController (~> 3.0)
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: e266cf991b933498df791e645e0d8ac294492153
+  AlamofireImage: bb8c8351c51cb1633bb6be69b6dbbaff37ce65b7
   DrawerController: 5e859c5dbeae3cea20981eb5ff2aa16eb946dff9
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: e214ac0fddff2462d2aaed961a84b01abf321621
+PODFILE CHECKSUM: b2231a8c8560d189c9f0f777928110cb96370fe2
 
 COCOAPODS: 1.2.0.beta.1

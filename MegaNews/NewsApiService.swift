@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 import SwiftyJSON
 
 protocol TargetType {
@@ -108,5 +109,18 @@ class NewsApiService {
                 }
         }
         
+    }
+    
+    public func getImage(_ url: URL, completion: @escaping (UIImage?)->Void ) {
+        
+        Alamofire.request(url).responseImage { (response) in
+            guard let image = response.result.value else {
+                completion(nil)
+                return
+            }
+            completion(image)
+        }
+        
+
     }
 }

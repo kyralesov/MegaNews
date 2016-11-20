@@ -14,6 +14,7 @@ struct Source {
     let id: String
     let name: String
     let description: String
+    let host: String
     let url: URL
     let category: String // business, entertainment, gaming, general, music, science-and-nature, sport, technology
     let language: String // en, de, fr
@@ -40,6 +41,7 @@ struct Source {
         self.name = name
         self.description = description
         self.url = URL(string: urlString)!
+        self.host = self.url.hostWithoutWWW!
         self.category = category
         self.language = language
         self.country = country

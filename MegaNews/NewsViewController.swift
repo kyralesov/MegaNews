@@ -11,11 +11,35 @@ import DrawerController
 
 class NewsViewController: UIViewController {
     
+    
+    //MARK: Model
+    
+    var source: Source? {
+        didSet {
+            fetchNews(forSource: source!.id)
+        }
+    }
+    
+    var articles: [Article]? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    //MARK: Outlets
+    
+    @IBOutlet weak var tableView: UITableView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupLeftMenuButton()
+        
+        // register cell
+        tableView.register(UINib(nibName: NewsArticleCell.nibName, bundle: nil),
+                           forCellReuseIdentifier: NewsArticleCell.defaultReuseIdentifier)
+        tableView.estimatedRowHeight = 101
     
 
     }
@@ -35,7 +59,35 @@ class NewsViewController: UIViewController {
     func leftDrawerButtonPress(_ sender: AnyObject?) {
         self.evo_drawerController?.toggleLeftDrawerSide(animated: true, completion: nil)
     }
+    
+    
+    func fetchNews(forSource id: String) {
+        NewsApiService.shared.request(router: .articles(source: id, sortBy: nil),
+                                      completion: {[unowned self] (data) in
+                self.articles = data as? [Article]
+        
+        })
+    }
 
 
+}
+
+extension NewsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return articles?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsArticleCell.defaultReuseIdentifier,
+                                                 for: indexPath) as! NewsArticleCell
+        
+        cell.article = self.articles?[indexPath.row]
+        
+        return cell
+    }
+}
+
+extension NewsViewController: UITableViewDelegate {
+    
 }
 

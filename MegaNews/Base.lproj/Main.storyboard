@@ -20,9 +20,37 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jDx-Sx-bPj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewsArticle" id="r3I-yy-EJw">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r3I-yy-EJw" id="B6U-Tw-kUd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="SVe-GC-9nB"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="ROW-ch-0Wu"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="jDx-Sx-bPj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="I6q-0E-uAx"/>
+                            <constraint firstAttribute="trailing" secondItem="jDx-Sx-bPj" secondAttribute="trailing" id="RQ6-sz-AHj"/>
+                            <constraint firstItem="jDx-Sx-bPj" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="ScP-hg-271"/>
+                            <constraint firstItem="jDx-Sx-bPj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="lg9-qL-12D"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="B8f-H4-Anq"/>
+                    <connections>
+                        <outlet property="tableView" destination="jDx-Sx-bPj" id="MQJ-3a-B6M"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -31,7 +59,7 @@
         <!--Settings-->
         <scene sceneID="6qC-sf-khi">
             <objects>
-                <viewController storyboardIdentifier="LeftViewController" id="98j-Mo-zvq" customClass="LeftViewController" customModule="MegaNews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeftViewController" id="98j-Mo-zvq" customClass="SettingsViewController" customModule="MegaNews" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dpf-rg-R9X"/>
                         <viewControllerLayoutGuide type="bottom" id="VRS-Xt-LYo"/>
@@ -39,11 +67,40 @@
                     <view key="view" contentMode="scaleToFill" id="084-bT-C81">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NgJ-0q-OxZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewsSource" id="DVg-Vd-CJh">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DVg-Vd-CJh" id="PJo-1t-xlV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="98j-Mo-zvq" id="4BO-aO-VIa"/>
+                                    <outlet property="delegate" destination="98j-Mo-zvq" id="HUm-Gw-0fe"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.95282706775006654" green="0.96309431208726537" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="NgJ-0q-OxZ" firstAttribute="bottom" secondItem="VRS-Xt-LYo" secondAttribute="top" id="ZMb-BB-w8l"/>
+                            <constraint firstAttribute="trailing" secondItem="NgJ-0q-OxZ" secondAttribute="trailing" id="nHs-qc-ocT"/>
+                            <constraint firstItem="NgJ-0q-OxZ" firstAttribute="leading" secondItem="084-bT-C81" secondAttribute="leading" id="sXm-cr-W1t"/>
+                            <constraint firstItem="NgJ-0q-OxZ" firstAttribute="top" secondItem="084-bT-C81" secondAttribute="top" id="yYM-7G-ohu"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="MZq-AY-OHH">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="W2n-Y5-pj4"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="NgJ-0q-OxZ" id="T3k-7C-Yn0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8cr-WF-xvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
