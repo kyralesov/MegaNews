@@ -7,43 +7,44 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class NewsSourceCell: UITableViewCell, NibLoadableView {
     
-    //MARK: Model
-    
-    var source: Source? {
-        didSet {
-            fetchImage((source?.logoSmall)!)
-            sourceNameLable.text = source?.name
-            sourceLinkLable.text = source?.host
-        }
-    }
     
     //MARK: Outlets
 
-    @IBOutlet weak var sourceImageView: UIImageView!
-    @IBOutlet weak var sourceNameLable: UILabel!
-    @IBOutlet weak var sourceLinkLable: UILabel!
+    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var nameLable: UILabel!
+    @IBOutlet weak var linkLable: UILabel!
     
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func configureCell(_ source: Source, placeholderImage: UIImage) {
+        
+        nameLable.text = source.name
+        linkLable.text = source.host
+        
+        let size = imgView.bounds.size
+        
+        imgView.af_setImage(
+            withURL: source.logoSmall,
+            placeholderImage: placeholderImage,
+            filter: AspectScaledToFitSizeFilter(size: size),
+            progress: nil,
+            progressQueue: DispatchQueue.global(qos: .default),
+            imageTransition: .noTransition,
+            runImageTransitionIfCached: false,
+            completion: nil
+        )
     }
     
-    func fetchImage(_ url: URL) {
-        NewsApiService.shared.getImage(url) {[unowned self] (image) in
-            DispatchQueue.main.async {
-                self.sourceImageView.image = image
-            }
-        }
+    override func prepareForReuse() {
+        imgView.af_cancelImageRequest()
+        imgView.layer.removeAllAnimations()
+        imgView.image = nil
+        
+        nameLable.text = nil
+        linkLable.text = nil
     }
     
 }

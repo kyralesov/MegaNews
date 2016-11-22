@@ -19,15 +19,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="100.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qoo-Ac-r8V">
-                        <rect key="frame" x="8" y="1.5" width="304" height="100"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qoo-Ac-r8V">
+                        <rect key="frame" x="0.0" y="1.5" width="312" height="100"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vs5-TV-TnL">
                                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                 <subviews>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="KAk-bg-Yc2">
-                                        <rect key="frame" x="40" y="40" width="20" height="20"/>
-                                    </activityIndicatorView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9wH-HF-Iur">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <constraints>
@@ -40,34 +37,33 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="KgI-De-Cjm"/>
-                                    <constraint firstItem="KAk-bg-Yc2" firstAttribute="centerX" secondItem="Vs5-TV-TnL" secondAttribute="centerX" id="WLO-iW-r1n"/>
                                     <constraint firstAttribute="height" constant="100" id="Y7N-Ph-Z5o"/>
                                     <constraint firstItem="9wH-HF-Iur" firstAttribute="centerX" secondItem="Vs5-TV-TnL" secondAttribute="centerX" id="Ysf-g0-JW6"/>
-                                    <constraint firstItem="KAk-bg-Yc2" firstAttribute="centerY" secondItem="Vs5-TV-TnL" secondAttribute="centerY" id="eNW-lI-z4X"/>
                                     <constraint firstItem="9wH-HF-Iur" firstAttribute="centerY" secondItem="Vs5-TV-TnL" secondAttribute="centerY" id="ewh-Wb-NZa"/>
                                     <constraint firstAttribute="width" secondItem="Vs5-TV-TnL" secondAttribute="height" multiplier="1:1" id="tRh-4H-DER"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tgb-d4-aga">
-                                <rect key="frame" x="108" y="0.0" width="196" height="54"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Tgb-d4-aga">
+                                <rect key="frame" x="108" y="0.0" width="204" height="100"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkt-nm-W36">
-                                        <rect key="frame" x="0.0" y="0.0" width="196" height="38.5"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkt-nm-W36">
+                                        <rect key="frame" x="0.0" y="0.0" width="204" height="81.5"/>
+                                        <string key="text">News API is a simple and easy-to-use API that returns News API is a simple and easy-to-use API that returns News API is a simple and easy-to-use API that returns </string>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lm5-k1-g8w">
-                                        <rect key="frame" x="0.0" y="38.5" width="196" height="15.5"/>
+                                        <rect key="frame" x="0.0" y="84.5" width="204" height="15.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YkM-iA-RBG">
-                                                <rect key="frame" x="0.0" y="0.0" width="168" height="15.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="Tue, 10:01 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YkM-iA-RBG">
+                                                <rect key="frame" x="0.0" y="0.0" width="142.5" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ung-LH-75s">
-                                                <rect key="frame" x="168" y="0.0" width="28" height="15.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="google.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ung-LH-75s">
+                                                <rect key="frame" x="142.5" y="0.0" width="61.5" height="15.5"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -82,18 +78,17 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Qoo-Ac-r8V" secondAttribute="bottom" id="4oF-b1-vor"/>
                     <constraint firstItem="Qoo-Ac-r8V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="1" id="WZs-jP-hww"/>
-                    <constraint firstItem="Qoo-Ac-r8V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="ccm-pG-F1n"/>
+                    <constraint firstItem="Qoo-Ac-r8V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ccm-pG-F1n"/>
                     <constraint firstAttribute="trailing" secondItem="Qoo-Ac-r8V" secondAttribute="trailing" constant="8" id="dsZ-BP-eje"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="articleHostLable" destination="Ung-LH-75s" id="Qt9-Xb-t3h"/>
-                <outlet property="articleImageView" destination="9wH-HF-Iur" id="mTM-g5-mdH"/>
-                <outlet property="articleLable" destination="lkt-nm-W36" id="sSc-zh-jh3"/>
-                <outlet property="articleTimeLable" destination="YkM-iA-RBG" id="aa1-6W-Z53"/>
-                <outlet property="spinner" destination="KAk-bg-Yc2" id="B7B-eW-0pg"/>
+                <outlet property="descriptionLable" destination="lkt-nm-W36" id="UEw-Er-Lby"/>
+                <outlet property="imgView" destination="9wH-HF-Iur" id="rLL-hG-LMK"/>
+                <outlet property="linkLable" destination="Ung-LH-75s" id="O49-6K-rFO"/>
+                <outlet property="timeLable" destination="YkM-iA-RBG" id="IMT-hd-53d"/>
             </connections>
-            <point key="canvasLocation" x="74" y="103.5"/>
+            <point key="canvasLocation" x="73" y="107"/>
         </tableViewCell>
     </objects>
 </document>

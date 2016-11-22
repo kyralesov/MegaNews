@@ -89,10 +89,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.95282706775006654" green="0.96309431208726537" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="NgJ-0q-OxZ" firstAttribute="bottom" secondItem="VRS-Xt-LYo" secondAttribute="top" id="ZMb-BB-w8l"/>
-                            <constraint firstAttribute="trailing" secondItem="NgJ-0q-OxZ" secondAttribute="trailing" id="nHs-qc-ocT"/>
-                            <constraint firstItem="NgJ-0q-OxZ" firstAttribute="leading" secondItem="084-bT-C81" secondAttribute="leading" id="sXm-cr-W1t"/>
-                            <constraint firstItem="NgJ-0q-OxZ" firstAttribute="top" secondItem="084-bT-C81" secondAttribute="top" id="yYM-7G-ohu"/>
+                            <constraint firstItem="VRS-Xt-LYo" firstAttribute="top" secondItem="NgJ-0q-OxZ" secondAttribute="bottom" id="GKq-xj-aqi"/>
+                            <constraint firstItem="NgJ-0q-OxZ" firstAttribute="top" secondItem="084-bT-C81" secondAttribute="top" id="IIm-Px-iGR"/>
+                            <constraint firstItem="NgJ-0q-OxZ" firstAttribute="leading" secondItem="084-bT-C81" secondAttribute="leading" id="U4u-u2-73v"/>
+                            <constraint firstAttribute="trailing" secondItem="NgJ-0q-OxZ" secondAttribute="trailing" id="sLg-vC-kqn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="MZq-AY-OHH">

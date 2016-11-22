@@ -111,6 +111,7 @@ class NewsApiService {
         
     }
     
+    
     public func getImage(_ url: URL, completion: @escaping (UIImage?)->Void ) {
         
         Alamofire.request(url).responseImage { (response) in
@@ -118,9 +119,13 @@ class NewsApiService {
                 completion(nil)
                 return
             }
-            completion(image)
+            let aspectScaledToFillImage = image.af_imageAspectScaled(toFill: CGSize(width: 100, height: 100))
+            completion(aspectScaledToFillImage)
         }
         
 
     }
+    
+    
+    
 }

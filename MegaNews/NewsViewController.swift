@@ -26,6 +26,12 @@ class NewsViewController: UIViewController {
         }
     }
     
+    
+    lazy var placeholderImage: UIImage = {
+        let image = UIImage(named: "Placeholder News")!
+        return image
+    }()
+    
     //MARK: Outlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -57,6 +63,7 @@ class NewsViewController: UIViewController {
     // MARK: - Button Handlers
     
     func leftDrawerButtonPress(_ sender: AnyObject?) {
+
         self.evo_drawerController?.toggleLeftDrawerSide(animated: true, completion: nil)
     }
     
@@ -81,7 +88,9 @@ extension NewsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsArticleCell.defaultReuseIdentifier,
                                                  for: indexPath) as! NewsArticleCell
         
-        cell.article = self.articles?[indexPath.row]
+        let article = self.articles?[indexPath.row]
+        
+        cell.configureCell(article!, placeholderImage: placeholderImage)
         
         return cell
     }

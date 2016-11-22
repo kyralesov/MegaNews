@@ -7,83 +7,48 @@
 //
 
 import UIKit
-
 import AlamofireImage
 
 class NewsArticleCell: UITableViewCell, NibLoadableView {
-    
-    //MARK: Dependency
-    
-    let imageCache = AutoPurgingImageCache()
-    
-    //MARK: Model
-    
-    var article: Article? {
-        didSet {
-            updateUI()
 
-        }
-    }
     
     //MARK: Outlets
     
-    @IBOutlet weak var articleImageView: UIImageView!
-    @IBOutlet weak var articleLable: UILabel!
-    @IBOutlet weak var articleTimeLable: UILabel!
-    @IBOutlet weak var articleHostLable: UILabel!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var descriptionLable: UILabel!
+    @IBOutlet weak var timeLable: UILabel!
+    @IBOutlet weak var linkLable: UILabel!
     
-    internal var articleImage: UIImage? {
-        get {
-            return articleImageView.image
-        }
-        set {
-            articleImageView.image = newValue
-            spinner.stopAnimating()
-        }
+    func configureCell(_ article: Article, placeholderImage: UIImage) {
+        
+        descriptionLable.text = article.description
+        timeLable.text = article.publishedAt
+        linkLable.text = article.url?.hostWithoutWWW
+        
+        let size = imgView.bounds.size
+        
+        imgView.af_setImage(
+            withURL: article.urlToImage!,
+            placeholderImage: placeholderImage,
+            filter: AspectScaledToFillSizeFilter(size: size),
+            progress: nil,
+            progressQueue: DispatchQueue.global(qos: .default),
+            imageTransition: .noTransition,
+            runImageTransitionIfCached: false,
+            completion: nil
+        )
     }
     
-    func updateUI() {
-        articleImageView.image = nil
-        articleLable.text = nil
-        articleTimeLable.text = nil
-        articleHostLable.text = nil
+    override func prepareForReuse() {
+        imgView.af_cancelImageRequest()
+        imgView.layer.removeAllAnimations()
+        imgView.image = nil
         
-        if let article = self.article {
-            setArticleImageView(article)
-            articleLable.text = article.description
-            articleTimeLable.text = article.publishedAt
-        }
+        descriptionLable.text = nil
+        timeLable.text = nil
+        linkLable.text = nil
+        
+    }
 
-    }
-    
-    func setArticleImageView(_ article: Article) {
-        
-        if let articleImageURL = article.urlToImage {
-            spinner.startAnimating()
-            
-            let cachedImage = imageCache.image(withIdentifier: articleImageURL.lastPathComponent)
-            guard cachedImage == nil else {
-                articleImage = cachedImage
-                return
-            }
-            
-            NewsApiService.shared.getImage(articleImageURL) {[unowned self] (imageData) in
-                DispatchQueue.main.async {
-                    
-                    if articleImageURL == article.urlToImage {
-                        if let image = imageData {
-                            self.articleImage = image
-                            self.imageCache.add(image, withIdentifier: articleImageURL.lastPathComponent)
-                        }
-                        
-                    }
-                    
-                }
-            }
-            
-        }
-        
-    }
     
 }

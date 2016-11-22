@@ -33,10 +33,11 @@ extension String {
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         let date = dateFormatter.date(from: self)
         
-        dateFormatter.dateFormat = "EEE, MMM d - h:mm a" // "EEE, MMM d, yyyy - h:mm a"
+        dateFormatter.dateFormat = "EEEE, h:mm a" // "EEE, MMM d, yyyy - h:mm a"
         // return the timeZone of your device i.e. America/Los_angeles
         let timeZone = TimeZone.autoupdatingCurrent.identifier as String
         dateFormatter.timeZone = TimeZone(identifier: timeZone)
         return dateFormatter.string(from: date!)
     }
+    
 }

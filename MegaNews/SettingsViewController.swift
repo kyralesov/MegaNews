@@ -17,6 +17,14 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    
+    lazy var placeholderImage: UIImage = {
+        let image = UIImage(named: "Placeholder News")!
+        return image
+    }()
+    
+    
+    
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     
@@ -59,8 +67,13 @@ extension SettingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewsSourceCell.defaultReuseIdentifier, for: indexPath) as! NewsSourceCell
-        cell.source = self.sources?[indexPath.row]
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: NewsSourceCell.defaultReuseIdentifier,
+            for: indexPath) as! NewsSourceCell
+        
+        let source = self.sources?[indexPath.row]
+        
+        cell.configureCell(source!, placeholderImage: placeholderImage)
         
         return cell
     }

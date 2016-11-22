@@ -28,12 +28,6 @@
                                     <constraint firstAttribute="height" constant="70" id="oPf-wz-NGT"/>
                                     <constraint firstAttribute="width" secondItem="cNI-0f-Ubn" secondAttribute="height" multiplier="1:1" id="yz8-s9-bvY"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="35"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uPg-BU-50v">
                                 <rect key="frame" x="79.5" y="16" width="224.5" height="51.5"/>
@@ -63,9 +57,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="sourceImageView" destination="cNI-0f-Ubn" id="8Es-Hn-00o"/>
-                <outlet property="sourceLinkLable" destination="Pjk-JR-xxX" id="oGv-Hd-8Yx"/>
-                <outlet property="sourceNameLable" destination="joa-xf-cC3" id="XPb-I3-25L"/>
+                <outlet property="imgView" destination="cNI-0f-Ubn" id="Q3w-kq-0Uo"/>
+                <outlet property="linkLable" destination="Pjk-JR-xxX" id="QLH-CM-c3o"/>
+                <outlet property="nameLable" destination="joa-xf-cC3" id="gIR-io-PmX"/>
             </connections>
             <point key="canvasLocation" x="25" y="80"/>
         </tableViewCell>
