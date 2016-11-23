@@ -33,6 +33,6 @@ struct Article {
         self.title = title
         self.url = URL(string: url)
         self.urlToImage = URL(string: urlToImage)
-        self.publishedAt = publishedAt.localTimeFromUTC
+        self.publishedAt = publishedAt.timeAgo
     }
 }

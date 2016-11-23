@@ -34,7 +34,6 @@ class SettingsViewController: UIViewController {
 
         self.evo_drawerController?.setMaximumLeftDrawerWidth(320, animated: true, completion: nil)
         
-        
         //sources
         fetchNewsSources()
   

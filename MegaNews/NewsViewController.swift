@@ -46,8 +46,7 @@ class NewsViewController: UIViewController {
         tableView.register(UINib(nibName: NewsArticleCell.nibName, bundle: nil),
                            forCellReuseIdentifier: NewsArticleCell.defaultReuseIdentifier)
         tableView.estimatedRowHeight = 101
-    
-
+        
     }
     
     

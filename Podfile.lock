@@ -1,27 +1,30 @@
 PODS:
-  - Alamofire (4.1.0)
-  - AlamofireImage (3.1.0):
-    - Alamofire (~> 4.0)
+  - Alamofire (4.2.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
   - DrawerController (3.0.0):
     - DrawerController/Core (= 3.0.0)
     - DrawerController/DrawerVisualStates (= 3.0.0)
   - DrawerController/Core (3.0.0)
   - DrawerController/DrawerVisualStates (3.0.0):
     - DrawerController/Core
+  - NSDate+TimeAgo (1.0.6)
   - SwiftyJSON (3.1.3)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlamofireImage (~> 3.1)
   - DrawerController (~> 3.0)
+  - NSDate+TimeAgo
   - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: e266cf991b933498df791e645e0d8ac294492153
-  AlamofireImage: bb8c8351c51cb1633bb6be69b6dbbaff37ce65b7
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   DrawerController: 5e859c5dbeae3cea20981eb5ff2aa16eb946dff9
+  NSDate+TimeAgo: 35601c619b2d59290055e4fe76e61d97677a2360
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: b2231a8c8560d189c9f0f777928110cb96370fe2
+PODFILE CHECKSUM: 88537b2570718f5e4a2b3e3fc0240db2cd3e4dd8
 
 COCOAPODS: 1.2.0.beta.1

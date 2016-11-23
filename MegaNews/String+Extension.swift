@@ -7,37 +7,47 @@
 //
 
 import Foundation
+import NSDate_TimeAgo
 
 extension String {
     
-    var localTimeFromUTC: String {
+    var timeAgo: String {
         
-        let formatSSS = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let formatSS  = "yyyy-MM-dd'T'HH:mm:ss.SSZ"
-        let formatS   = "yyyy-MM-dd'T'HH:mm:ss.SZ"
-        let format    = "yyyy-MM-dd'T'HH:mm:ssZ"
+        // "yyyy-MM-dd'T'HH:mm:ss.SSSZ" -> "yyyy-MM-dd'T'HH:mm:ssZ"
+        var validTimeString: String {
+            let components = self.components(separatedBy: ".")
+            if components.count == 1 { return self}
+            return components[0].appending("Z")
+        }
         
         let dateFormatter =  DateFormatter()
-        
-        switch self.characters.count {
-        case formatSSS.characters.count - 2: // 'T' -> -2
-            dateFormatter.dateFormat = formatSSS
-        case formatSS.characters.count - 2:
-            dateFormatter.dateFormat = formatSS
-        case formatS.characters.count - 2:
-            dateFormatter.dateFormat = formatS
-        default:
-            dateFormatter.dateFormat = format
-        }
-
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        let date = dateFormatter.date(from: self)
-        
-        dateFormatter.dateFormat = "EEEE, h:mm a" // "EEE, MMM d, yyyy - h:mm a"
-        // return the timeZone of your device i.e. America/Los_angeles
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let timeZone = TimeZone.autoupdatingCurrent.identifier as String
         dateFormatter.timeZone = TimeZone(identifier: timeZone)
-        return dateFormatter.string(from: date!)
+        
+        guard let timeInterval = dateFormatter.date(from: validTimeString)?.timeIntervalSince1970 else { return ""}
+        
+        return NSDate(timeIntervalSince1970: timeInterval).timeAgo() ?? ""
+        
     }
+    
+    
+    //    var localTimeFromUTC: String {
+    //
+    //        let timeString = self.validTimePattern
+    //
+    //        let dateFormatter =  DateFormatter()
+    //        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    //        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+    //        let date = dateFormatter.date(from: timeString)
+    //
+    //        dateFormatter.dateFormat = "EEEE, h:mm a" // "EEE, MMM d, yyyy - h:mm a"
+    //        // return the timeZone of your device i.e. America/Los_angeles
+    //        let timeZone = TimeZone.autoupdatingCurrent.identifier as String
+    //        dateFormatter.timeZone = TimeZone(identifier: timeZone)
+    //        return dateFormatter.string(from: date!)
+    //    }
+    
+    
     
 }

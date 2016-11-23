@@ -8,5 +8,6 @@ target 'MegaNews' do
   pod 'AlamofireImage', '~> 3.1'
   pod 'SwiftyJSON'
   pod 'DrawerController', '~> 3.0'
+  pod 'NSDate+TimeAgo'
 
 end
