@@ -16,7 +16,7 @@ class NewsViewController: UIViewController {
     
     var source: Source? {
         didSet {
-            fetchNews(forSource: source!.id)
+            fetchNews(forSource: source!.id, sortBy: source?.sortBysAvailable[0])
         }
     }
     
@@ -67,8 +67,8 @@ class NewsViewController: UIViewController {
     }
     
     
-    func fetchNews(forSource id: String) {
-        NewsApiService.shared.request(router: .articles(source: id, sortBy: nil),
+    func fetchNews(forSource id: String, sortBy: String?) {
+        NewsApiService.shared.request(router: .articles(source: id, sortBy: sortBy),
                                       completion: {[unowned self] (data) in
                 self.articles = data as? [Article]
         

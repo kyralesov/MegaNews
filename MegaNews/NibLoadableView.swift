@@ -1,5 +1,5 @@
 //
-//  ReusableIdentifire.swift
+//  NibLoadableView.swift
 //  MegaNews
 //
 //  Created by Eugene Kurilenko on 11/19/16.
@@ -20,6 +20,6 @@ extension NibLoadableView where Self: UIView {
         return String(describing: self)
     }
     static var defaultReuseIdentifier: String {
-        return String(describing: self)
+        return nibName
     }
 }

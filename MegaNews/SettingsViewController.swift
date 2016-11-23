@@ -42,6 +42,11 @@ class SettingsViewController: UIViewController {
         tableView.register(UINib(nibName: NewsSourceCell.nibName, bundle: nil),
                            forCellReuseIdentifier: NewsSourceCell.defaultReuseIdentifier)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+    }
 
     
     
