@@ -31,9 +31,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.evo_drawerController?.setMaximumLeftDrawerWidth(320, animated: true, completion: nil)
-        
+  
         //sources
         fetchNewsSources()
   
@@ -46,6 +44,10 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
+        self.navigationController?.view.setNeedsLayout()
+        
+        self.tableView.reloadSections(IndexSet(integersIn: NSRange(location: 0, length: self.tableView.numberOfSections - 1).toRange() ?? 0..<0), with: .none)
+
     }
 
     
@@ -67,6 +69,15 @@ extension SettingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sources?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if section ==  0 {
+            return "News sources"
+        } else {
+           return nil
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,4 +108,5 @@ extension SettingsViewController: UITableViewDelegate {
         self.evo_drawerController?.toggleLeftDrawerSide(animated: true, completion: nil)
 
     }
+    
 }

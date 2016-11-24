@@ -10,7 +10,7 @@ import Foundation
 
 
 struct Storyboard {
-    static let newsNavigationIdentifire = "NewsNavigation"
-    static let leftMenuNavigationIdentifire = "LeftMenuNavigation"
+    static let settingsViewController = "SettingsViewController"
+    static let newsViewController = "NewsViewController"
     
 }

@@ -20,14 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Navigation
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let navigationController = mainStoryboard
-            .instantiateViewController(withIdentifier: Storyboard.newsNavigationIdentifire)
-        let leftSideNavController = mainStoryboard
-            .instantiateViewController(withIdentifier: Storyboard.leftMenuNavigationIdentifire)
+        let newsViewController = mainStoryboard
+            .instantiateViewController(withIdentifier: Storyboard.newsViewController)
+        let settingsViewController = mainStoryboard
+            .instantiateViewController(withIdentifier: Storyboard.settingsViewController)
+        
+        let newsNav = UINavigationController(rootViewController: newsViewController)
 
-        self.drawerController = DrawerController(centerViewController: navigationController,
-                                                 leftDrawerViewController: leftSideNavController)
-        self.drawerController.showsShadows = false
+        self.drawerController = DrawerController(centerViewController: newsNav,
+                                                 leftDrawerViewController: settingsViewController)
+        self.drawerController.showsShadows = true
+        self.drawerController.shadowRadius = 4.0
+        self.drawerController.shadowOpacity = 0.1
+        self.drawerController.maximumLeftDrawerWidth = 320.0
         self.drawerController.openDrawerGestureModeMask = .all
         self.drawerController.closeDrawerGestureModeMask = .all
         

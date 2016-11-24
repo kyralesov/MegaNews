@@ -40,6 +40,10 @@ class NewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "News"
+        navigationController?.navigationBar.barTintColor = UIColor.white
+        
+        
         setupLeftMenuButton()
         
         // register cell
