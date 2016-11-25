@@ -16,7 +16,8 @@ struct Article {
     let title: String
     let url: URL?
     let urlToImage: URL?
-    let publishedAt: String
+    let publishedAt: Date?
+    let publishedTimeAgo: String
     
     init?(_ json: JSON) {
         guard
@@ -33,6 +34,7 @@ struct Article {
         self.title = title
         self.url = URL(string: url)
         self.urlToImage = URL(string: urlToImage)
-        self.publishedAt = publishedAt.timeAgo
+        self.publishedAt = publishedAt.toPublished
+        self.publishedTimeAgo = publishedAt.toTimeAgo
     }
 }

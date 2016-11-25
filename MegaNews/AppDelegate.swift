@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.drawerController.showsShadows = true
         self.drawerController.shadowRadius = 4.0
         self.drawerController.shadowOpacity = 0.1
-        self.drawerController.maximumLeftDrawerWidth = 320.0
+        self.drawerController.maximumLeftDrawerWidth = 280.0
         self.drawerController.openDrawerGestureModeMask = .all
         self.drawerController.closeDrawerGestureModeMask = .all
         

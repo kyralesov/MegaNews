@@ -33,7 +33,6 @@ class NewsViewController: UIViewController {
     }()
     
     //MARK: Outlets
-    
     @IBOutlet weak var tableView: UITableView!
     
 
@@ -61,6 +60,7 @@ class NewsViewController: UIViewController {
         
         self.navigationItem.setLeftBarButton(leftDrawerButton, animated: true)
     }
+    
     
     
     // MARK: - Button Handlers

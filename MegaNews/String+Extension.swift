@@ -11,7 +11,7 @@ import NSDate_TimeAgo
 
 extension String {
     
-    var timeAgo: String {
+    var toPublished: Date? {
         // "yyyy-MM-dd'T'HH:mm:ss.SSSZ" -> "yyyy-MM-dd'T'HH:mm:ssZ"
         var validTimeString: String {
             let components = self.components(separatedBy: ".")
@@ -24,10 +24,12 @@ extension String {
         let timeZone = TimeZone.autoupdatingCurrent.identifier as String
         dateFormatter.timeZone = TimeZone(identifier: timeZone)
         
-        guard let timeInterval = dateFormatter.date(from: validTimeString)?.timeIntervalSince1970 else { return ""}
-        
+        return  dateFormatter.date(from: validTimeString)
+    }
+    
+    var toTimeAgo: String {
+        guard let timeInterval = self.toPublished?.timeIntervalSince1970 else { return "" }
         return NSDate(timeIntervalSince1970: timeInterval).timeAgo() ?? ""
-        
     }
     
 }

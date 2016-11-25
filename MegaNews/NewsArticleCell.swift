@@ -22,7 +22,7 @@ class NewsArticleCell: UITableViewCell, NibLoadableView {
     func configureCell(_ article: Article, placeholderImage: UIImage) {
         
         descriptionLable.text = article.description
-        timeLable.text = article.publishedAt
+        timeLable.text = article.publishedTimeAgo
         linkLable.text = article.url?.hostWithoutWWW
         
         let size = imgView.bounds.size

@@ -13,4 +13,11 @@ struct Storyboard {
     static let settingsViewController = "SettingsViewController"
     static let newsViewController = "NewsViewController"
     
+    static let MyNewsSettingsController = "MyNewsSettingsController"
+    static let AllNewsSettingsController = "AllNewsSettingsController"
+}
+
+struct Title {
+    static let settingsHeaderAllNewsSourcesTitle = "All news sources"
+    static let settingsHeaderMyNewsTitle = "My news"
 }
