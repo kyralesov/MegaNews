@@ -21,3 +21,7 @@ struct Title {
     static let settingsHeaderAllNewsSourcesTitle = "All news sources"
     static let settingsHeaderMyNewsTitle = "My news"
 }
+
+struct UserDefaultsKey {
+    static let sourses = "UserDefaultsSoursesKey"
+}

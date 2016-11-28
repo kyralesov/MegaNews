@@ -96,7 +96,6 @@ class NewsApiService {
                         }
                         let articles = articlesData.flatMap(Article.init)
                         completion(articles)
-                        
                     }
                     
                 case .failure(let error):
@@ -110,22 +109,5 @@ class NewsApiService {
         }
         
     }
-    
-    
-    public func getImage(_ url: URL, completion: @escaping (UIImage?)->Void ) {
-        
-        Alamofire.request(url).responseImage { (response) in
-            guard let image = response.result.value else {
-                completion(nil)
-                return
-            }
-            let aspectScaledToFillImage = image.af_imageAspectScaled(toFill: CGSize(width: 100, height: 100))
-            completion(aspectScaledToFillImage)
-        }
-        
-
-    }
-    
-    
     
 }

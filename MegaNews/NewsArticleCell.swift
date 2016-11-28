@@ -13,7 +13,6 @@ class NewsArticleCell: UITableViewCell, NibLoadableView {
 
     
     //MARK: Outlets
-    
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var descriptionLable: UILabel!
     @IBOutlet weak var timeLable: UILabel!

@@ -26,16 +26,19 @@ class NewsSourceCell: UITableViewCell, NibLoadableView {
         
         let size = imgView.bounds.size
         
-        imgView.af_setImage(
-            withURL: source.logoSmall,
-            placeholderImage: placeholderImage,
-            filter: AspectScaledToFitSizeFilter(size: size),
-            progress: nil,
-            progressQueue: DispatchQueue.global(qos: .default),
-            imageTransition: .noTransition,
-            runImageTransitionIfCached: false,
-            completion: nil
-        )
+        if let imageURL = source.logoSmall {
+            imgView.af_setImage(
+                withURL: imageURL,
+                placeholderImage: placeholderImage,
+                filter: AspectScaledToFitSizeFilter(size: size),
+                progress: nil,
+                progressQueue: DispatchQueue.global(qos: .default),
+                imageTransition: .noTransition,
+                runImageTransitionIfCached: false,
+                completion: nil
+            )
+        }
+        
     }
     
     override func prepareForReuse() {

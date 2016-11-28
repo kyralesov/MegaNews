@@ -9,14 +9,25 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
+    
+    //dependency
+    let defaults = UserDefaults.standard
+    
 
     //MARK: - Model
-    var sources: [Source]? {
+    var sources: Array<Source>? {
         didSet {
-            tableView.reloadData()
+            if let sources = sources {
+               fetchAllArticles(sources)
+               tableView.reloadData()
+            }
+          
         }
     }
     
+    var articles = [Article]()
+    
+    private let accessQueue = DispatchQueue(label: "SynchronizedArrayAccess", attributes: .concurrent)
     
     lazy var placeholderImage: UIImage = {
         let image = UIImage(named: "Placeholder News")!
@@ -32,12 +43,16 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Fetch News Sourses
+        if let dataArray = defaults.object(forKey: UserDefaultsKey.sourses) as? [Data] {
+            let sourcesArray = dataArray.map{Source.init(data: $0)!}
+            self.sources = sourcesArray
+  
+        } else {
+            fetchNewsSources()
+        }
         
-  
-        //sources
-        fetchNewsSources()
-  
-
+        // TableView settings
         tableView.estimatedRowHeight = 100
         tableView.register(UINib(nibName: NewsSourceCell.nibName, bundle: nil),
                            forCellReuseIdentifier: NewsSourceCell.defaultReuseIdentifier)
@@ -64,11 +79,43 @@ class SettingsViewController: UIViewController {
                                                        language: nil,
                                                        country: nil))
         {[unowned self] (data) in
-            self.sources = data as? [Source]
+            if let sources = data as? [Source] {
+                self.sources =  sources
+                
+                // Set sourses to UserDefaults
+                let encoded = sources.map{$0.encode()}
+                self.defaults.set(encoded, forKey: UserDefaultsKey.sourses)
+            }
         }
     }
     
-
+    var count = 0
+    private func fetchAllArticles(_ sources: Array<Source>) {
+            for source in sources {
+                fetchArticles(source, completion: {[unowned self] in
+                    print("\(source.name) complited! -> \(self.articles.count)")
+                    
+                    self.count = self.count + 1
+                    if self.count == sources.count {
+                        print("DONE!!!")
+                        self.count = 0
+                    }
+                })
+            }
+    }
+    
+    private func fetchArticles(_ source: Source, completion: @escaping ()->Void) {
+        NewsApiService.shared.request(router: .articles(source: source.id, sortBy: source.sortBysAvailable[0]))
+        {[unowned self] (data) in
+            self.accessQueue.async(flags:.barrier) {
+                if let articles = data as? Array<Article> {
+                    self.articles += articles
+                    completion()
+                }
+            }
+        }
+    }
+    
 }
 
 //MARK: - UITableViewDataSource
@@ -108,9 +155,7 @@ extension SettingsViewController: UITableViewDataSource {
             let source = self.sources?[indexPath.row]
             
             cell.configureCell(source!, placeholderImage: placeholderImage)
-            cell.selectionStyle = .gray
-            
-            cell.accessoryType = .checkmark
+
             return cell
         }
         
@@ -178,11 +223,10 @@ extension SettingsViewController: SettingsViewHeaderFooterViewDelegate {
         
         
         if headerString == Title.settingsHeaderMyNewsTitle {
-            
-            
+        
             let myNewsVC = mainStoryboard.instantiateViewController(withIdentifier: Storyboard.MyNewsSettingsController)
             let myNewsNav = UINavigationController(rootViewController: myNewsVC)
-            myNewsVC.title = Title.settingsHeaderMyNewsTitle + "settings"
+            myNewsVC.title = Title.settingsHeaderMyNewsTitle + " settings"
             present(myNewsNav, animated: true, completion: nil)
 
         } else if headerString == Title.settingsHeaderAllNewsSourcesTitle {
