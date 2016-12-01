@@ -20,6 +20,6 @@ extension NibLoadableView where Self: UIView {
         return String(describing: self)
     }
     static var defaultReuseIdentifier: String {
-        return nibName
+        return String(describing: self)
     }
 }

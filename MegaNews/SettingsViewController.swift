@@ -43,14 +43,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Fetch News Sourses
-        if let dataArray = defaults.object(forKey: UserDefaultsKey.sourses) as? [Data] {
-            let sourcesArray = dataArray.map{Source.init(data: $0)!}
-            self.sources = sourcesArray
-  
-        } else {
-            fetchNewsSources()
-        }
+        fetchNewsSources()
         
         // TableView settings
         tableView.estimatedRowHeight = 100
@@ -74,17 +67,35 @@ class SettingsViewController: UIViewController {
     
     
     //MARK: - Private
+    
     private func fetchNewsSources() {
+        //Fetch News Sourses
+        if let dataArray = defaults.object(forKey: UserDefaultsKey.sourses) as? [Data] {
+            let sourcesArray = dataArray.map{Source.init(data: $0)!}
+            self.sources = sourcesArray
+            //check and compare local sources with site sources
+            fetchNewsSourcesAndCheck(localSources: sourcesArray)
+            
+        } else {
+            fetchNewsSourcesAndCheck(localSources: nil)
+        }
+    }
+    
+    private func fetchNewsSourcesAndCheck(localSources local: [Source]?) {
         NewsApiService.shared.request(router: .sources(category: nil,
                                                        language: nil,
                                                        country: nil))
         {[unowned self] (data) in
             if let sources = data as? [Source] {
-                self.sources =  sources
                 
-                // Set sourses to UserDefaults
-                let encoded = sources.map{$0.encode()}
-                self.defaults.set(encoded, forKey: UserDefaultsKey.sourses)
+                if local == nil || sources != local! {
+                    self.sources =  sources
+                    // Set sourses to UserDefaults
+                    let encoded = sources.map{$0.encode()}
+                    self.defaults.set(encoded, forKey: UserDefaultsKey.sourses)
+                    
+                }
+               
             }
         }
     }
@@ -224,9 +235,12 @@ extension SettingsViewController: SettingsViewHeaderFooterViewDelegate {
         
         if headerString == Title.settingsHeaderMyNewsTitle {
         
-            let myNewsVC = mainStoryboard.instantiateViewController(withIdentifier: Storyboard.MyNewsSettingsController)
+            let myNewsVC = mainStoryboard.instantiateViewController(withIdentifier: Storyboard.MyNewsSettingsController) as! MyNewsSettingsTableViewController
             let myNewsNav = UINavigationController(rootViewController: myNewsVC)
             myNewsVC.title = Title.settingsHeaderMyNewsTitle + " settings"
+            myNewsVC.sources = self.sources
+            
+            
             present(myNewsNav, animated: true, completion: nil)
 
         } else if headerString == Title.settingsHeaderAllNewsSourcesTitle {
@@ -234,3 +248,4 @@ extension SettingsViewController: SettingsViewHeaderFooterViewDelegate {
         }
     }
 }
+

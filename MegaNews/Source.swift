@@ -155,3 +155,9 @@ extension Source {
     
 }
 
+extension Source: Equatable {
+    public static func ==(lhs: Source, rhs: Source) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+

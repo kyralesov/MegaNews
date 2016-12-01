@@ -24,4 +24,5 @@ struct Title {
 
 struct UserDefaultsKey {
     static let sourses = "UserDefaultsSoursesKey"
+    static let userSourses = "UserDefaultsUserSoursesKey"
 }

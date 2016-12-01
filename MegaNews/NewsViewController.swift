@@ -52,6 +52,11 @@ class NewsViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     
     func setupLeftMenuButton() {
         let leftDrawerButton = DrawerBarButtonItem(target: self,
