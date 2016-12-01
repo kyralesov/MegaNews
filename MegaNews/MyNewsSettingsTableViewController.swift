@@ -20,21 +20,18 @@ class MyNewsSettingsTableViewController: UITableViewController {
         }
     }
     
-    private var userSources = [Source]()
+    private var userSourcesSet = Set<Source>()
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        if let userSourcesData = defaults.object(forKey: UserDefaultsKey.userSourses) as? [Data] {
-            let userSourcesArray = userSourcesData.map{Source.init(data: $0)!}
-            self.userSources = userSourcesArray
+
+        // Set user sources
+        if let userSourcesArray = SourcesDefaults().userSources {
+            self.userSourcesSet = Set(userSourcesArray)
         }
-        
+
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
                                          target: self,
@@ -47,8 +44,8 @@ class MyNewsSettingsTableViewController: UITableViewController {
     func doneButtonAction(_ sender: UIBarButtonItem) {
         
         // Set user sourses to UserDefaults
-        let encoded = self.userSources.map{$0.encode()}
-        self.defaults.set(encoded, forKey: UserDefaultsKey.userSourses)
+        var sourcesDefaults = SourcesDefaults()
+        sourcesDefaults.userSources = Array(self.userSourcesSet)
         
         dismiss(animated: true, completion: nil)
     }
@@ -74,7 +71,7 @@ class MyNewsSettingsTableViewController: UITableViewController {
         
         if let source = self.sources?[indexPath.row] {
             cell.textLabel?.text = source.name
-            if self.userSources.contains(source) {
+            if self.userSourcesSet.contains(source) {
                 cell.accessoryType = .checkmark
             }
             
@@ -98,10 +95,10 @@ class MyNewsSettingsTableViewController: UITableViewController {
         switch cell.accessoryType {
         case .checkmark:
             cell.accessoryType = .none
-            self.userSources.remove(object: source)
+            self.userSourcesSet.remove(source)
         case .none:
             cell.accessoryType = .checkmark
-            self.userSources.append(source)
+            self.userSourcesSet.insert(source)
         default:
             cell.accessoryType = .none
         }

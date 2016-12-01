@@ -161,3 +161,9 @@ extension Source: Equatable {
     }
 }
 
+extension Source: Hashable {
+    var hashValue: Int {
+        return id.hashValue
+    }
+}
+

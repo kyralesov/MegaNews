@@ -70,15 +70,9 @@ class SettingsViewController: UIViewController {
     
     private func fetchNewsSources() {
         //Fetch News Sourses
-        if let dataArray = defaults.object(forKey: UserDefaultsKey.sourses) as? [Data] {
-            let sourcesArray = dataArray.map{Source.init(data: $0)!}
-            self.sources = sourcesArray
-            //check and compare local sources with site sources
-            fetchNewsSourcesAndCheck(localSources: sourcesArray)
-            
-        } else {
-            fetchNewsSourcesAndCheck(localSources: nil)
-        }
+        self.sources = SourcesDefaults().sources
+        fetchNewsSourcesAndCheck(localSources: self.sources)
+
     }
     
     private func fetchNewsSourcesAndCheck(localSources local: [Source]?) {
@@ -90,10 +84,9 @@ class SettingsViewController: UIViewController {
                 
                 if local == nil || sources != local! {
                     self.sources =  sources
-                    // Set sourses to UserDefaults
-                    let encoded = sources.map{$0.encode()}
-                    self.defaults.set(encoded, forKey: UserDefaultsKey.sourses)
-                    
+                    // Set sourses to SourcesDefaults
+                    var sourcesDefaults = SourcesDefaults()
+                    sourcesDefaults.sources = sources
                 }
                
             }
