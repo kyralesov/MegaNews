@@ -15,6 +15,7 @@ struct Storyboard {
     
     static let MyNewsSettingsController = "MyNewsSettingsController"
     static let AllNewsSettingsController = "AllNewsSettingsController"
+    static let loadingViewController = "LoadingViewController"
 }
 
 struct Title {

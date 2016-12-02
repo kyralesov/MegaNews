@@ -69,6 +69,7 @@ class NewsApiService {
     
     static let shared = NewsApiService()
     
+    
     public func request(router: Router, completion: @escaping ([Any]?)->Void ) {
         
         Alamofire.request(router.url, method: router.method, parameters: router.parameters)
@@ -109,5 +110,60 @@ class NewsApiService {
         }
         
     }
+    
+    func fetchSources(completion: @escaping ([Source]?)->Void) {
+        
+        if let localSources = SourcesDefaults().sources {
+            completion(localSources)
+        }
+        // check sources with localSources
+        NewsApiService.shared.request(router: .sources(category: nil,
+                                                       language: nil,
+                                                       country: nil))
+        { (data) in
+            if let sources = data as? [Source] {
+                let local = SourcesDefaults().sources
+                if local == nil || sources != local! {
+                    // Set sourses to SourcesDefaults
+                    var sourcesDefaults = SourcesDefaults()
+                    sourcesDefaults.sources = sources
+                    
+                    completion(sources)
+                }
+                
+            }
+        }
+        
+    }
+    
+    private let accessQueue = DispatchQueue(label: "SynchronizedArrayAccess", attributes: .concurrent)
+    private var articles = [Article]()
+    private var count = 0
+
+    func fetchArticlesFor(sources: [Source], completion: @escaping ([Article]?)->Void) {
+        
+        
+        for source in sources {
+            self.request(router: .articles(source: source.id, sortBy: source.sortBysAvailable[0]))
+            {[unowned self] (data) in
+                self.accessQueue.async(flags:.barrier) {
+                    if let articles = data as? Array<Article> {
+                        self.articles += articles
+                        
+                        self.count += 1
+                        if self.count == sources.count {
+                            completion(self.articles)
+                            self.count = 0
+                            self.articles.removeAll()
+                        }
+                        
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    
     
 }

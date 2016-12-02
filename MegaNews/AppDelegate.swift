@@ -18,39 +18,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
-        //Navigation
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newsViewController = mainStoryboard
-            .instantiateViewController(withIdentifier: Storyboard.newsViewController)
-        let settingsViewController = mainStoryboard
-            .instantiateViewController(withIdentifier: Storyboard.settingsViewController)
-        
-        let newsNav = UINavigationController(rootViewController: newsViewController)
-
-        self.drawerController = DrawerController(centerViewController: newsNav,
-                                                 leftDrawerViewController: settingsViewController)
-        self.drawerController.showsShadows = true
-        self.drawerController.shadowRadius = 4.0
-        self.drawerController.shadowOpacity = 0.1
-        self.drawerController.maximumLeftDrawerWidth = 280.0
-        self.drawerController.openDrawerGestureModeMask = .all
-        self.drawerController.closeDrawerGestureModeMask = .all
-        
-        self.drawerController.drawerVisualStateBlock = {(drawerController, drawerSide, percentVisible) in
-            let visualStateBlock = DrawerVisualState.parallaxVisualStateBlock(parallaxFactor: 2.0)
-            visualStateBlock(drawerController, drawerSide, percentVisible)
-        }
-        
-        self.window?.rootViewController = drawerController
-        
         return true
     }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loadingViewController = mainStoryboard
+            .instantiateViewController(withIdentifier: Storyboard.loadingViewController)
+        self.window?.rootViewController = loadingViewController
+        
+        
+        NewsApiService.shared.fetchSources { (sources) in
+            
+            let userSources = Array(sources![0...10])
+            
+            NewsApiService.shared.fetchArticlesFor(sources: userSources, completion: {  (articles) in
+                print(articles?.count ?? "nil")
+                
+                DispatchQueue.main.async { [unowned self] in
+                    self.setDrawerController()
+                }
+            })
+            
+        }
+        
         self.window?.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.window?.makeKeyAndVisible()
+        
+        
         
         return true
     }
@@ -76,7 +74,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    // MARK: Private Methods
+    
+    private func setDrawerController() {
+        
+        //Navigation
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newsViewController = mainStoryboard
+            .instantiateViewController(withIdentifier: Storyboard.newsViewController)
+        let settingsViewController = mainStoryboard
+            .instantiateViewController(withIdentifier: Storyboard.settingsViewController)
+        
+        let newsNav = UINavigationController(rootViewController: newsViewController)
+        
+        self.drawerController = DrawerController(centerViewController: newsNav,
+                                                 leftDrawerViewController: settingsViewController)
+        self.drawerController.showsShadows = true
+        self.drawerController.shadowRadius = 4.0
+        self.drawerController.shadowOpacity = 0.1
+        self.drawerController.maximumLeftDrawerWidth = 280.0
+        self.drawerController.openDrawerGestureModeMask = .all
+        self.drawerController.closeDrawerGestureModeMask = .all
+        
+        self.drawerController.drawerVisualStateBlock = {(drawerController, drawerSide, percentVisible) in
+            let visualStateBlock = DrawerVisualState.parallaxVisualStateBlock(parallaxFactor: 2.0)
+            visualStateBlock(drawerController, drawerSide, percentVisible)
+        }
+        self.window?.rootViewController = drawerController
 
-
+    }
+    
 }
 

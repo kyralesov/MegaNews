@@ -11,25 +11,31 @@ import Foundation
 
 struct SourcesDefaults {
     
-    private let defaults = UserDefaults.standard
-    
     private let kSourses =     "SourcesDefaultsAllSoursesKey"
     private let kUserSourses = "SourcesDefaultsUserSoursesKey"
     
     var sources: [Source]? {
-        get { return getSources(forKey: kSourses) }
-        set { setSources(value: sources, forKey: kSourses) }
+        get {
+            return getSources(forKey: kSourses)
+        }
+        set {
+            setSources(value: newValue, forKey: kSourses)
+        }
     }
     
     var userSources: [Source]? {
-        get { return getSources(forKey: kUserSourses) }
-        set { setSources(value: newValue, forKey: kUserSourses) }
+        get {
+            return getSources(forKey: kUserSourses)
+        }
+        set {
+            setSources(value: newValue, forKey: kUserSourses)
+        }
     }
     
     
-    //
+    // Private
     private func getSources(forKey: String) -> [Source]? {
-        guard let dataArray = defaults.object(forKey: forKey) as? [Data] else {return nil}
+        guard let dataArray = UserDefaults.standard.object(forKey: forKey) as? [Data] else {return nil}
         let sources = dataArray.map{Source.init(data: $0)!}
         return sources
     }
@@ -37,9 +43,9 @@ struct SourcesDefaults {
     private mutating func setSources(value: [Source]?, forKey: String) {
         if value != nil {
             let encoded = value!.map{$0.encode()}
-            self.defaults.set(encoded, forKey: forKey)
+            UserDefaults.standard.set(encoded, forKey: forKey)
         } else {
-            defaults.removeObject(forKey: forKey)
+            UserDefaults.standard.removeObject(forKey: forKey)
         }
     }
 }

@@ -18,16 +18,11 @@ class SettingsViewController: UIViewController {
     var sources: Array<Source>? {
         didSet {
             if let sources = sources {
-               fetchAllArticles(sources)
                tableView.reloadData()
             }
           
         }
     }
-    
-    var articles = [Article]()
-    
-    private let accessQueue = DispatchQueue(label: "SynchronizedArrayAccess", attributes: .concurrent)
     
     lazy var placeholderImage: UIImage = {
         let image = UIImage(named: "Placeholder News")!
@@ -89,33 +84,6 @@ class SettingsViewController: UIViewController {
                     sourcesDefaults.sources = sources
                 }
                
-            }
-        }
-    }
-    
-    var count = 0
-    private func fetchAllArticles(_ sources: Array<Source>) {
-            for source in sources {
-                fetchArticles(source, completion: {[unowned self] in
-                    print("\(source.name) complited! -> \(self.articles.count)")
-                    
-                    self.count = self.count + 1
-                    if self.count == sources.count {
-                        print("DONE!!!")
-                        self.count = 0
-                    }
-                })
-            }
-    }
-    
-    private func fetchArticles(_ source: Source, completion: @escaping ()->Void) {
-        NewsApiService.shared.request(router: .articles(source: source.id, sortBy: source.sortBysAvailable[0]))
-        {[unowned self] (data) in
-            self.accessQueue.async(flags:.barrier) {
-                if let articles = data as? Array<Article> {
-                    self.articles += articles
-                    completion()
-                }
             }
         }
     }
