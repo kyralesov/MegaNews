@@ -31,6 +31,11 @@ class MyNewsSettingsTableViewController: UITableViewController {
         if let userSourcesArray = SourcesDefaults().userSources {
             self.userSourcesSet = Set(userSourcesArray)
         }
+        
+        // TableView settings
+        tableView.register(UINib(nibName: NewsSourceSettingsCell.nibName, bundle: nil),
+                           forCellReuseIdentifier: NewsSourceSettingsCell.defaultReuseIdentifier)
+
 
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
@@ -67,10 +72,11 @@ class MyNewsSettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SourceCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsSourceSettingsCell.defaultReuseIdentifier,
+                                                 for: indexPath) as! NewsSourceSettingsCell
         
         if let source = self.sources?[indexPath.row] {
-            cell.textLabel?.text = source.name
+            cell.configureCell(source)
             if self.userSourcesSet.contains(source) {
                 cell.accessoryType = .checkmark
             }
@@ -83,6 +89,16 @@ class MyNewsSettingsTableViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if let source = self.sources?[indexPath.row] {
+            if self.userSourcesSet.contains(source) {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
+        }
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

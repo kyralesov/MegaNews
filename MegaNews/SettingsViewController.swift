@@ -156,9 +156,9 @@ extension SettingsViewController: UITableViewDataSource {
                 withIdentifier: NewsSourceCell.defaultReuseIdentifier,
                 for: indexPath) as! NewsSourceCell
             
-            let source = self.sources?[indexPath.row]
-            
-            cell.configureCell(source!, placeholderImage: placeholderImage)
+            if let source = self.sources?[indexPath.row] {
+                cell.configureCell(source, placeholderImage: placeholderImage)                
+            }
 
             return cell
         }

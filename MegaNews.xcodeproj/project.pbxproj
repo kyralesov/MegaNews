@@ -18,6 +18,8 @@
 		14A6DA9A1DECBCD60079A8B5 /* MyNewsSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A6DA991DECBCD60079A8B5 /* MyNewsSettingsTableViewController.swift */; };
 		14B30CAD1DF0CA6C0093B0CE /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B30CAC1DF0CA6C0093B0CE /* Array+Extension.swift */; };
 		14B30CAF1DF0D43D0093B0CE /* SourcesDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B30CAE1DF0D43D0093B0CE /* SourcesDefaults.swift */; };
+		14B30CB61DF0F6550093B0CE /* NewsSourceSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B30CB41DF0F6550093B0CE /* NewsSourceSettingsCell.swift */; };
+		14B30CB71DF0F6550093B0CE /* NewsSourceSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B30CB51DF0F6550093B0CE /* NewsSourceSettingsCell.xib */; };
 		14BC03751DDFB1E900ACE204 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC03741DDFB1E900ACE204 /* Source.swift */; };
 		14BC03781DDFB8A000ACE204 /* NewsApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC03771DDFB8A000ACE204 /* NewsApiService.swift */; };
 		14BC037A1DDFC06300ACE204 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC03791DDFC06300ACE204 /* Article.swift */; };
@@ -44,6 +46,8 @@
 		14A6DA991DECBCD60079A8B5 /* MyNewsSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNewsSettingsTableViewController.swift; sourceTree = "<group>"; };
 		14B30CAC1DF0CA6C0093B0CE /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		14B30CAE1DF0D43D0093B0CE /* SourcesDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourcesDefaults.swift; sourceTree = "<group>"; };
+		14B30CB41DF0F6550093B0CE /* NewsSourceSettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsSourceSettingsCell.swift; sourceTree = "<group>"; };
+		14B30CB51DF0F6550093B0CE /* NewsSourceSettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsSourceSettingsCell.xib; sourceTree = "<group>"; };
 		14BC03741DDFB1E900ACE204 /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		14BC03771DDFB8A000ACE204 /* NewsApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsApiService.swift; sourceTree = "<group>"; };
 		14BC03791DDFC06300ACE204 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 		14032F631DE0462B007BD6DD /* TableViewHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				14B30CB41DF0F6550093B0CE /* NewsSourceSettingsCell.swift */,
+				14B30CB51DF0F6550093B0CE /* NewsSourceSettingsCell.xib */,
 				14032F651DE0479B007BD6DD /* NewsSourceCell.swift */,
 				14032F661DE0479B007BD6DD /* NewsSourceCell.xib */,
 				14669F7C1DE233DA00CFE8E9 /* NewsArticleCell.swift */,
@@ -272,6 +278,7 @@
 				1416F05F1DE7C47C00529B94 /* SettingsViewHeaderFooterView.xib in Resources */,
 				14D56D7B1DDC5636000B7E02 /* Assets.xcassets in Resources */,
 				14D56D791DDC5636000B7E02 /* Main.storyboard in Resources */,
+				14B30CB71DF0F6550093B0CE /* NewsSourceSettingsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +340,7 @@
 				14BC037A1DDFC06300ACE204 /* Article.swift in Sources */,
 				14BC037F1DDFC57400ACE204 /* String+Extension.swift in Sources */,
 				140FAEE41DDEFAD100BB8DD9 /* SettingsViewController.swift in Sources */,
+				14B30CB61DF0F6550093B0CE /* NewsSourceSettingsCell.swift in Sources */,
 				14A6DA9A1DECBCD60079A8B5 /* MyNewsSettingsTableViewController.swift in Sources */,
 				14B30CAF1DF0D43D0093B0CE /* SourcesDefaults.swift in Sources */,
 				14C34AA11DE09B2400A2332C /* URL+Extension.swift in Sources */,
