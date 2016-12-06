@@ -11,18 +11,30 @@ import DrawerController
 
 class NewsViewController: UIViewController {
     
+    //MARK: Outlets
+    @IBOutlet weak var tableView: UITableView!
     
     //MARK: Model
     
-    var source: Source? {
+    var sources: [Source]? {
         didSet {
-            fetchNews(forSource: source!.id, sortBy: source?.sortBysAvailable[0])
+            
+            if let sources = sources {
+                NewsApiService.shared.fetchArticlesFor(sources: sources, completion: {
+                    [unowned self] (articles) in
+                        self.articles = articles?.sortArticles()
+                })
+            }
         }
     }
     
     var articles: [Article]? {
         didSet {
-            tableView.reloadData()
+            if tableView != nil {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }      
         }
     }
     
@@ -32,15 +44,22 @@ class NewsViewController: UIViewController {
         return image
     }()
     
-    //MARK: Outlets
-    @IBOutlet weak var tableView: UITableView!
     
+    var refreshControll: UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "News"
         navigationController?.navigationBar.barTintColor = UIColor.white
+        
+        //Notifications
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self,
+                       selector: #selector(catchNotification(_:)),
+                       name: MyNotification.userSourcesNotification,
+                       object: nil)
         
         
         setupLeftMenuButton()
@@ -50,11 +69,22 @@ class NewsViewController: UIViewController {
                            forCellReuseIdentifier: NewsArticleCell.defaultReuseIdentifier)
         tableView.estimatedRowHeight = 101
         
+        refreshControll = UIRefreshControl()
+        refreshControll.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControll)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        //self.refreshControll.beginRefreshing()
+        
+    }
+    
+    deinit {
+        let nc = NotificationCenter.default
+        nc.removeObserver(self)
     }
     
     
@@ -75,13 +105,33 @@ class NewsViewController: UIViewController {
         self.evo_drawerController?.toggleLeftDrawerSide(animated: true, completion: nil)
     }
     
+    // MARK: - Private Methods
     
-    func fetchNews(forSource id: String, sortBy: String?) {
-        NewsApiService.shared.request(router: .articles(source: id, sortBy: sortBy),
-                                      completion: {[unowned self] (data) in
-                self.articles = data as? [Article]
+    func refresh() {
         
-        })
+        if let userSources = SourcesDefaults().userSources {
+            NewsApiService.shared.fetchArticlesFor(sources: userSources) {
+                [unowned self] articles in
+                self.articles = articles?.sortArticles()
+                
+                DispatchQueue.main.async { [unowned self] in
+                    self.refreshControll.endRefreshing()
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    
+    }
+    
+    // MaARK: - Notification
+    
+    func catchNotification(_ notification: Notification) ->Void {
+        
+        guard let userInfo = notification.userInfo,
+            let sources = userInfo["sources"] as? [Source]
+            else { return }
+        
+        self.sources = sources
     }
 
 

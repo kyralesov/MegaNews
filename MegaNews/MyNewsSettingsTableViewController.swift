@@ -9,10 +9,7 @@
 import UIKit
 
 class MyNewsSettingsTableViewController: UITableViewController {
-    
-    //dependency
-    let defaults = UserDefaults.standard
-    
+
     //MARK: Model
     var sources: [Source]? {
         didSet {
@@ -21,9 +18,7 @@ class MyNewsSettingsTableViewController: UITableViewController {
     }
     
     private var userSourcesSet = Set<Source>()
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,9 +43,15 @@ class MyNewsSettingsTableViewController: UITableViewController {
     // MARK: - Actions
     func doneButtonAction(_ sender: UIBarButtonItem) {
         
+        let userSources = Array(self.userSourcesSet)
         // Set user sourses to UserDefaults
         var sourcesDefaults = SourcesDefaults()
-        sourcesDefaults.userSources = Array(self.userSourcesSet)
+        sourcesDefaults.userSources = userSources
+        
+        let nc = NotificationCenter.default
+        nc.post(name: MyNotification.userSourcesNotification,
+                object: nil,
+                userInfo: ["sources" : userSources])
         
         dismiss(animated: true, completion: nil)
     }

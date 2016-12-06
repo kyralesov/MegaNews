@@ -11,19 +11,19 @@ import UIKit
 class NewsSourceSettingsCell: UITableViewCell, NibLoadableView {
     
     @IBOutlet weak var nameLable: UILabel!
-    @IBOutlet weak var categoryLable: UILabel!
+    @IBOutlet weak var siteLable: UILabel!
     
     
     func configureCell(_ source: Source) {
         
         nameLable.text = source.name
-        categoryLable.text = source.category
+        siteLable.text = source.host
  
     }
     
     override func prepareForReuse() {
         nameLable.text = nil
-        categoryLable.text = nil
+        siteLable.text = nil
     }
     
     

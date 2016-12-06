@@ -10,26 +10,13 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    //dependency
-    let defaults = UserDefaults.standard
-    
-
     //MARK: - Model
-    var sources: Array<Source>? {
-        didSet {
-            if let sources = sources {
-               tableView.reloadData()
-            }
-          
-        }
-    }
+    var sources: [Source]?
     
     lazy var placeholderImage: UIImage = {
         let image = UIImage(named: "Placeholder News")!
         return image
     }()
-    
-    
     
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -38,7 +25,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchNewsSources()
+        //fetchNewsSources()
         
         // TableView settings
         tableView.estimatedRowHeight = 100
@@ -56,36 +43,6 @@ class SettingsViewController: UIViewController {
         
         self.tableView.reloadSections(IndexSet(integersIn: NSRange(location: 0, length: self.tableView.numberOfSections - 1).toRange() ?? 0..<0), with: .none)
 
-    }
-    
-
-    
-    
-    //MARK: - Private
-    
-    private func fetchNewsSources() {
-        //Fetch News Sourses
-        self.sources = SourcesDefaults().sources
-        fetchNewsSourcesAndCheck(localSources: self.sources)
-
-    }
-    
-    private func fetchNewsSourcesAndCheck(localSources local: [Source]?) {
-        NewsApiService.shared.request(router: .sources(category: nil,
-                                                       language: nil,
-                                                       country: nil))
-        {[unowned self] (data) in
-            if let sources = data as? [Source] {
-                
-                if local == nil || sources != local! {
-                    self.sources =  sources
-                    // Set sourses to SourcesDefaults
-                    var sourcesDefaults = SourcesDefaults()
-                    sourcesDefaults.sources = sources
-                }
-               
-            }
-        }
     }
     
 }
@@ -146,13 +103,21 @@ extension SettingsViewController: UITableViewDelegate {
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let source = self.sources?[indexPath.row]
-        
         let centerNavVC = self.evo_drawerController?.centerViewController as? UINavigationController
         let centerVC = centerNavVC?.viewControllers.first as? NewsViewController
-        centerVC?.source = source
         
-        
+        switch indexPath.section {
+        case 0:
+            let userSources = SourcesDefaults().userSources
+            centerVC?.sources = userSources
+            
+        case 1:
+            let source = self.sources?[indexPath.row]
+            centerVC?.sources = Array(arrayLiteral: source!)
+        default:
+            break
+        }
+    
         self.evo_drawerController?.toggleLeftDrawerSide(animated: true, completion: nil)
 
     }

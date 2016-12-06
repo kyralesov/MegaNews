@@ -17,3 +17,13 @@ extension Array where Element: Equatable {
         }
     }
 }
+
+extension Array where Element: Articleable{
+    
+     func sortArticles() -> [Element] {
+        return sorted {
+            $0.publishedAt ?? Date() > $1.publishedAt ?? Date()
+        }
+    }
+    
+}

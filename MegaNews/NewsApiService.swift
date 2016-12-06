@@ -117,6 +117,8 @@ class NewsApiService {
             completion(localSources)
         }
         // check sources with localSources
+        
+        
         NewsApiService.shared.request(router: .sources(category: nil,
                                                        language: nil,
                                                        country: nil))
@@ -124,6 +126,7 @@ class NewsApiService {
             if let sources = data as? [Source] {
                 let local = SourcesDefaults().sources
                 if local == nil || sources != local! {
+
                     // Set sourses to SourcesDefaults
                     var sourcesDefaults = SourcesDefaults()
                     sourcesDefaults.sources = sources
@@ -144,7 +147,7 @@ class NewsApiService {
         
         
         for source in sources {
-            self.request(router: .articles(source: source.id, sortBy: source.sortBysAvailable[0]))
+            self.request(router: .articles(source: source.id, sortBy: nil ))
             {[unowned self] (data) in
                 self.accessQueue.async(flags:.barrier) {
                     if let articles = data as? Array<Article> {

@@ -9,7 +9,17 @@
 import Foundation
 import SwiftyJSON
 
-struct Article {
+protocol Articleable {
+    var author: String { get }
+    var description: String { get }
+    var title: String { get }
+    var url: URL? { get }
+    var urlToImage: URL? { get }
+    var publishedAt: Date? { get }
+    var publishedTimeAgo: String { get }
+}
+
+struct Article: Articleable {
     
     let author: String
     let description: String
@@ -36,5 +46,17 @@ struct Article {
         self.urlToImage = URL(string: urlToImage)
         self.publishedAt = publishedAt.toPublished
         self.publishedTimeAgo = publishedAt.toTimeAgo
+    }
+}
+
+extension Article: Hashable {
+    var hashValue: Int {
+        return description.hashValue
+    }
+}
+
+extension Article: Equatable {
+    public static func ==(lhs: Article, rhs: Article) -> Bool {
+        return lhs.hashValue == rhs.hashValue
     }
 }

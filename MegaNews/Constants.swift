@@ -27,3 +27,7 @@ struct UserDefaultsKey {
     static let sourses = "UserDefaultsSoursesKey"
     static let userSourses = "UserDefaultsUserSoursesKey"
 }
+
+struct MyNotification {
+    static let userSourcesNotification = Notification.Name(rawValue:"UserSourcesNotification")
+}
