@@ -32,7 +32,7 @@ class NewsArticleCell: UITableViewCell, NibLoadableView {
             filter: AspectScaledToFillSizeFilter(size: size),
             progress: nil,
             progressQueue: DispatchQueue.global(qos: .default),
-            imageTransition: .noTransition,
+            imageTransition: .crossDissolve(0.5),
             runImageTransitionIfCached: false,
             completion: nil
         )
