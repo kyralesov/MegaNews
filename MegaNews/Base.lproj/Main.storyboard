@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,6 +34,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="NDk-Kk-aMJ" kind="show" identifier="NewsDetailsSegue" id="DuY-hW-o5M"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -54,6 +59,134 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3018.4000000000001" y="122.78860569715144"/>
+        </scene>
+        <!--News Details View Controller-->
+        <scene sceneID="wmd-VU-i4z">
+            <objects>
+                <viewController id="NDk-Kk-aMJ" customClass="NewsDetailsViewController" customModule="MegaNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ExI-AN-Y4d"/>
+                        <viewControllerLayoutGuide type="bottom" id="UVu-rm-326"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qRj-FJ-Ud1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Egf-Nh-oMg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="SKF-Yn-etY">
+                                        <rect key="frame" x="8" y="20" width="359" height="627"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmQ-7T-tRY">
+                                                <rect key="frame" x="0.0" y="0.0" width="359" height="33.5"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="253" translatesAutoresizingMaskIntoConstraints="NO" id="YeW-aL-iAb">
+                                                <rect key="frame" x="0.0" y="53.5" width="359" height="14.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="1 minutes ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TxP-W5-8Qx">
+                                                        <rect key="frame" x="0.0" y="0.0" width="302" height="14.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="news.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbv-uC-gdr">
+                                                        <rect key="frame" x="302" y="0.0" width="57" height="14.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bem-v8-2gr">
+                                                <rect key="frame" x="0.0" y="88" width="359" height="201.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="bem-v8-2gr" secondAttribute="height" multiplier="16:9" id="uQh-pL-q7T"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJu-Yp-j9f">
+                                                <rect key="frame" x="0.0" y="309.5" width="359" height="174.5"/>
+                                                <string key="text">We are delighted when our viewers like an episode and even more delighted when they love one. But we are compelled, just the same, to avoid repeating what we've done before. If we fail -- we want to fail outrageously, foolishly, gloriously -- giving it everything we've got in the cause of making something new and strange and hopefully, awesome.</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ns-qn-3kg">
+                                                <rect key="frame" x="0.0" y="504" width="359" height="123"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                <state key="normal" title="Read the full article"/>
+                                                <connections>
+                                                    <action selector="goToAction:" destination="NDk-Kk-aMJ" eventType="touchUpInside" id="Vbm-iN-HOb"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="SKF-Yn-etY" secondAttribute="bottom" constant="20" id="5Ld-4A-AFX"/>
+                                    <constraint firstItem="SKF-Yn-etY" firstAttribute="leading" secondItem="Egf-Nh-oMg" secondAttribute="leadingMargin" id="ENM-BS-AUz"/>
+                                    <constraint firstItem="SKF-Yn-etY" firstAttribute="top" secondItem="Egf-Nh-oMg" secondAttribute="top" constant="20" id="g1r-Yp-A5x"/>
+                                    <constraint firstItem="SKF-Yn-etY" firstAttribute="centerX" secondItem="Egf-Nh-oMg" secondAttribute="centerX" id="gWO-Zm-zJH"/>
+                                    <constraint firstItem="SKF-Yn-etY" firstAttribute="centerY" secondItem="Egf-Nh-oMg" secondAttribute="centerY" id="vqX-gT-bIm"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="SKF-Yn-etY" secondAttribute="trailing" id="xpE-fL-jna"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Egf-Nh-oMg" firstAttribute="top" secondItem="qRj-FJ-Ud1" secondAttribute="topMargin" id="3Ug-2L-qYp"/>
+                            <constraint firstItem="UVu-rm-326" firstAttribute="top" secondItem="Egf-Nh-oMg" secondAttribute="bottom" id="RQw-73-5Ph"/>
+                            <constraint firstItem="Egf-Nh-oMg" firstAttribute="centerX" secondItem="qRj-FJ-Ud1" secondAttribute="centerX" id="YAb-6R-U3g"/>
+                            <constraint firstItem="Egf-Nh-oMg" firstAttribute="leading" secondItem="qRj-FJ-Ud1" secondAttribute="leading" id="kSv-RC-Ogf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="articleImageView" destination="bem-v8-2gr" id="elL-YN-Ani"/>
+                        <outlet property="articleLinkButton" destination="5ns-qn-3kg" id="sSL-Bu-Wvb"/>
+                        <outlet property="descriptionLabel" destination="wJu-Yp-j9f" id="dyi-cF-x5f"/>
+                        <outlet property="siteLabel" destination="pbv-uC-gdr" id="KWL-2j-tQN"/>
+                        <outlet property="timeLabel" destination="TxP-W5-8Qx" id="pYM-B6-rtN"/>
+                        <outlet property="titleLabel" destination="jmQ-7T-tRY" id="zMS-c6-65f"/>
+                        <segue destination="n11-QI-yry" kind="show" identifier="ShowURLSegue" id="euB-qA-58S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YaY-ks-klq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3825" y="123"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="3kN-xF-j3E">
+            <objects>
+                <viewController id="n11-QI-yry" customClass="WebViewController" customModule="MegaNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WU3-PD-wVc"/>
+                        <viewControllerLayoutGuide type="bottom" id="smD-Sn-EW4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6vS-91-kUu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6nW-uY-uEB">
+                                <rect key="frame" x="0.0" y="20" width="375" height="2"/>
+                            </progressView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6nW-uY-uEB" firstAttribute="leading" secondItem="6vS-91-kUu" secondAttribute="leading" id="L4D-9k-O24"/>
+                            <constraint firstItem="6nW-uY-uEB" firstAttribute="top" secondItem="WU3-PD-wVc" secondAttribute="bottom" id="nQB-y9-A7Y"/>
+                            <constraint firstAttribute="trailing" secondItem="6nW-uY-uEB" secondAttribute="trailing" id="wFX-ct-tBM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="progressView" destination="6nW-uY-uEB" id="YUa-55-EwJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fFm-IN-Aph" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4549.6000000000004" y="122.78860569715144"/>
         </scene>
         <!--My News Settings Table View Controller-->
         <scene sceneID="Tnd-a3-WBC">

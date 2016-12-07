@@ -14,13 +14,13 @@ class NewsArticleCell: UITableViewCell, NibLoadableView {
     
     //MARK: Outlets
     @IBOutlet weak var imgView: UIImageView!
-    @IBOutlet weak var descriptionLable: UILabel!
+    @IBOutlet weak var titleLable: UILabel!
     @IBOutlet weak var timeLable: UILabel!
     @IBOutlet weak var linkLable: UILabel!
     
     func configureCell(_ article: Article, placeholderImage: UIImage) {
         
-        descriptionLable.text = article.description
+        titleLable.text = article.title
         timeLable.text = article.publishedTimeAgo
         linkLable.text = article.url?.hostWithoutWWW
         
@@ -43,7 +43,7 @@ class NewsArticleCell: UITableViewCell, NibLoadableView {
         imgView.layer.removeAllAnimations()
         imgView.image = nil
         
-        descriptionLable.text = nil
+        titleLable.text = nil
         timeLable.text = nil
         linkLable.text = nil
         

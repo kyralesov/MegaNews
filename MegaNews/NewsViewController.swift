@@ -133,6 +133,17 @@ class NewsViewController: UIViewController {
         
         self.sources = sources
     }
+    
+    
+    // MARK: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Storyboard.newsDetailsSegue {
+            let newsDetailsVC = segue.destination as! NewsDetailsViewController
+            let row = (sender as! IndexPath).row
+            let article = self.articles?[row]
+            newsDetailsVC.article = article
+        }
+    }
 
 
 }
@@ -156,5 +167,14 @@ extension NewsViewController: UITableViewDataSource {
 
 extension NewsViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        performSegue(withIdentifier: Storyboard.newsDetailsSegue, sender: indexPath)
+        
+        
+    }
+    
 }
+
 
