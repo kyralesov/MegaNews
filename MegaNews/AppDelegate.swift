@@ -121,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 NewsApiService.shared.fetchArticlesFor(sources: userSources!, completion: {  (articles) in
                     
-                    let sortedArticles = articles?.sortArticles()
+                    let sortedArticles = articles?.uniqueElements.sortArticles()
                     
                     DispatchQueue.main.async { [unowned self] in
                         

@@ -22,7 +22,7 @@ class NewsViewController: UIViewController {
             if let sources = sources {
                 NewsApiService.shared.fetchArticlesFor(sources: sources, completion: {
                     [unowned self] (articles) in
-                        self.articles = articles?.sortArticles()
+                        self.articles = articles?.uniqueElements.sortArticles()
                 })
             }
         }
@@ -78,8 +78,6 @@ class NewsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //self.refreshControll.beginRefreshing()
-        
     }
     
     deinit {
@@ -109,10 +107,10 @@ class NewsViewController: UIViewController {
     
     func refresh() {
         
-        if let userSources = SourcesDefaults().userSources {
-            NewsApiService.shared.fetchArticlesFor(sources: userSources) {
+        if let sources = self.sources {
+            NewsApiService.shared.fetchArticlesFor(sources: sources) {
                 [unowned self] articles in
-                self.articles = articles?.sortArticles()
+                self.articles = articles?.uniqueElements.sortArticles()
                 
                 DispatchQueue.main.async { [unowned self] in
                     self.refreshControll.endRefreshing()

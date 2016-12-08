@@ -41,7 +41,7 @@ class SettingsViewController: UIViewController {
     
         self.navigationController?.view.setNeedsLayout()
         
-        self.tableView.reloadSections(IndexSet(integersIn: NSRange(location: 0, length: self.tableView.numberOfSections - 1).toRange() ?? 0..<0), with: .none)
+        //self.tableView.reloadSections(IndexSet(integersIn: NSRange(location: 0, length: self.tableView.numberOfSections - 1).toRange() ?? 0..<0), with: .none)
 
     }
     
@@ -73,6 +73,7 @@ extension SettingsViewController: UITableViewDataSource {
         
         if indexPath.section == 0 {
             let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+            cell.imageView?.image = UIImage(named: "My News")
             cell.textLabel?.text = "My News"
             return cell
         } else {
@@ -133,6 +134,10 @@ extension SettingsViewController: UITableViewDelegate {
             header.headerLabel.text = Title.settingsHeaderMyNewsTitle
         } else {
             header.headerLabel.text = Title.settingsHeaderAllNewsSourcesTitle
+            // temporary settings button grey color
+            let tintedImage = header.settingsButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
+            header.settingsButton.setImage(tintedImage, for: .normal)
+            header.settingsButton.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         }
 
         header.contentView.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9607843137, blue: 0.9607843137, alpha: 1)
@@ -170,7 +175,9 @@ extension SettingsViewController: SettingsViewHeaderFooterViewDelegate {
             present(myNewsNav, animated: true, completion: nil)
 
         } else if headerString == Title.settingsHeaderAllNewsSourcesTitle {
-            print("-> \(Title.settingsHeaderAllNewsSourcesTitle)")
+            
+            //
+            
         }
     }
 }

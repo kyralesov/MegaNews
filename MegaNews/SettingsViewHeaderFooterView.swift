@@ -17,6 +17,8 @@ class SettingsViewHeaderFooterView: UITableViewHeaderFooterView, NibLoadableView
 
     //MARK: Outlets
     @IBOutlet weak var headerLabel: UILabel!
+    @IBOutlet weak var settingsButton: UIButton!
+    
     
     //MARK: Delegate
     weak var delegate: SettingsViewHeaderFooterViewDelegate?

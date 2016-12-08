@@ -53,6 +53,11 @@ class WebViewController: UIViewController {
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         
+        // clearing of cache
+        URLCache.shared.removeAllCachedResponses()
+        URLCache.shared.diskCapacity = 0
+        URLCache.shared.memoryCapacity = 0
+        
         if let url = url {
             let request = URLRequest(url: url)
             webView.load(request)

@@ -27,3 +27,22 @@ extension Array where Element: Articleable{
     }
     
 }
+
+extension Sequence where Iterator.Element: Hashable {
+    
+    var uniqueElements: [Iterator.Element] {
+        return Array(
+            Set(self)
+        )
+    }
+}
+
+extension Sequence where Iterator.Element: Equatable {
+    var uniqueElements: [Iterator.Element] {
+        return self.reduce([]) {uniqueElements, element in
+            uniqueElements.contains(element) ?
+            uniqueElements :
+            uniqueElements + [element]
+        }
+    }
+}
