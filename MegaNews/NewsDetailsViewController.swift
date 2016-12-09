@@ -22,7 +22,7 @@ class NewsDetailsViewController: UIViewController {
     
     
     @IBAction func goToAction(_ sender: UIButton) {
-        performSegue(withIdentifier: Storyboard.showURLSegue, sender: sender)
+        performSegue(withIdentifier: Constants.Storyboard.showURLSegue, sender: sender)
     }
     
 
@@ -54,7 +54,7 @@ class NewsDetailsViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Storyboard.showURLSegue {
+        if segue.identifier == Constants.Storyboard.showURLSegue {
             let vc = segue.destination as! WebViewController
             let btn = sender as! UIButton
             switch btn.tag {

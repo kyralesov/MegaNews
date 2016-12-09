@@ -49,7 +49,7 @@ class MyNewsSettingsTableViewController: UITableViewController {
         sourcesDefaults.userSources = userSources
         
         let nc = NotificationCenter.default
-        nc.post(name: MyNotification.userSourcesNotification,
+        nc.post(name: Constants.MyNotification.userSourcesNotification,
                 object: nil,
                 userInfo: ["sources" : userSources])
         

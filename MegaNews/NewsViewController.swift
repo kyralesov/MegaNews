@@ -58,7 +58,7 @@ class NewsViewController: UIViewController {
         let nc = NotificationCenter.default
         nc.addObserver(self,
                        selector: #selector(catchNotification(_:)),
-                       name: MyNotification.userSourcesNotification,
+                       name: Constants.MyNotification.userSourcesNotification,
                        object: nil)
         
         
@@ -135,7 +135,7 @@ class NewsViewController: UIViewController {
     
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Storyboard.newsDetailsSegue {
+        if segue.identifier == Constants.Storyboard.newsDetailsSegue {
             let newsDetailsVC = segue.destination as! NewsDetailsViewController
             let row = (sender as! IndexPath).row
             let article = self.articles?[row]
@@ -168,7 +168,7 @@ extension NewsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        performSegue(withIdentifier: Storyboard.newsDetailsSegue, sender: indexPath)
+        performSegue(withIdentifier: Constants.Storyboard.newsDetailsSegue, sender: indexPath)
         
         
     }

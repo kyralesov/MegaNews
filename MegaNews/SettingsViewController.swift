@@ -131,9 +131,9 @@ extension SettingsViewController: UITableViewDelegate {
         header.delegate = self
         
         if section == 0 {
-            header.headerLabel.text = Title.settingsHeaderMyNewsTitle
+            header.headerLabel.text = Constants.Title.settingsHeaderMyNewsTitle
         } else {
-            header.headerLabel.text = Title.settingsHeaderAllNewsSourcesTitle
+            header.headerLabel.text = Constants.Title.settingsHeaderAllNewsSourcesTitle
             // temporary settings button grey color
             let tintedImage = header.settingsButton.imageView?.image?.withRenderingMode(.alwaysTemplate)
             header.settingsButton.setImage(tintedImage, for: .normal)
@@ -164,17 +164,17 @@ extension SettingsViewController: SettingsViewHeaderFooterViewDelegate {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         
-        if headerString == Title.settingsHeaderMyNewsTitle {
+        if headerString == Constants.Title.settingsHeaderMyNewsTitle {
         
-            let myNewsVC = mainStoryboard.instantiateViewController(withIdentifier: Storyboard.MyNewsSettingsController) as! MyNewsSettingsTableViewController
+            let myNewsVC = mainStoryboard.instantiateViewController(withIdentifier: Constants.Storyboard.MyNewsSettingsController) as! MyNewsSettingsTableViewController
             let myNewsNav = UINavigationController(rootViewController: myNewsVC)
-            myNewsVC.title = Title.settingsHeaderMyNewsTitle + " settings"
+            myNewsVC.title = Constants.Title.settingsHeaderMyNewsTitle + " settings"
             myNewsVC.sources = self.sources
             
             
             present(myNewsNav, animated: true, completion: nil)
 
-        } else if headerString == Title.settingsHeaderAllNewsSourcesTitle {
+        } else if headerString == Constants.Title.settingsHeaderAllNewsSourcesTitle {
             
             //
             

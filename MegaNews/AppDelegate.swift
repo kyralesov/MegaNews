@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set LoadingViewController
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let loadingViewController = mainStoryboard
-            .instantiateViewController(withIdentifier: Storyboard.loadingViewController)
+            .instantiateViewController(withIdentifier: Constants.Storyboard.loadingViewController)
         self.window?.rootViewController = loadingViewController
         
         fetchSourcesAndArticles()
@@ -75,12 +75,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newsViewController = mainStoryboard
-            .instantiateViewController(withIdentifier: Storyboard.newsViewController) as! NewsViewController
+            .instantiateViewController(withIdentifier: Constants.Storyboard.newsViewController) as! NewsViewController
         // set articles
         newsViewController.articles = articles
         
         let settingsViewController = mainStoryboard
-            .instantiateViewController(withIdentifier: Storyboard.settingsViewController) as! SettingsViewController
+            .instantiateViewController(withIdentifier: Constants.Storyboard.settingsViewController) as! SettingsViewController
         // set sources
         settingsViewController.sources = sources
         

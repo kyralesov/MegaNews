@@ -8,29 +8,31 @@
 
 import Foundation
 
-
-struct Storyboard {
-    static let settingsViewController = "SettingsViewController"
-    static let newsViewController = "NewsViewController"
+struct Constants {
+    struct Storyboard {
+        static let settingsViewController = "SettingsViewController"
+        static let newsViewController = "NewsViewController"
+        
+        static let MyNewsSettingsController = "MyNewsSettingsController"
+        static let AllNewsSettingsController = "AllNewsSettingsController"
+        static let loadingViewController = "LoadingViewController"
+        
+        static let newsDetailsSegue = "NewsDetailsSegue"
+        static let showURLSegue = "ShowURLSegue"
+    }
     
-    static let MyNewsSettingsController = "MyNewsSettingsController"
-    static let AllNewsSettingsController = "AllNewsSettingsController"
-    static let loadingViewController = "LoadingViewController"
+    struct Title {
+        static let settingsHeaderAllNewsSourcesTitle = "All news sources"
+        static let settingsHeaderMyNewsTitle = "My news"
+    }
     
-    static let newsDetailsSegue = "NewsDetailsSegue"
-    static let showURLSegue = "ShowURLSegue"
+    struct UserDefaults {
+        static let sourses = "UserDefaultsSoursesKey"
+        static let userSourses = "UserDefaultsUserSoursesKey"
+    }
+    
+    struct MyNotification {
+        static let userSourcesNotification = Notification.Name(rawValue:"UserSourcesNotification")
+    }
 }
 
-struct Title {
-    static let settingsHeaderAllNewsSourcesTitle = "All news sources"
-    static let settingsHeaderMyNewsTitle = "My news"
-}
-
-struct UserDefaultsKey {
-    static let sourses = "UserDefaultsSoursesKey"
-    static let userSourses = "UserDefaultsUserSoursesKey"
-}
-
-struct MyNotification {
-    static let userSourcesNotification = Notification.Name(rawValue:"UserSourcesNotification")
-}
